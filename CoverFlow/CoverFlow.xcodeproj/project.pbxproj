@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0452D2002574F9EF00168865 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D1FF2574F9EF00168865 /* AppDelegate.swift */; };
-		0452D2022574F9EF00168865 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D2012574F9EF00168865 /* SceneDelegate.swift */; };
 		0452D2042574F9EF00168865 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D2032574F9EF00168865 /* ViewController.swift */; };
 		0452D2072574F9EF00168865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0452D2052574F9EF00168865 /* Main.storyboard */; };
 		0452D2092574F9F000168865 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0452D2082574F9F000168865 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		0452D1FC2574F9EF00168865 /* CoverFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoverFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0452D1FF2574F9EF00168865 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0452D2012574F9EF00168865 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0452D2032574F9EF00168865 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0452D2062574F9EF00168865 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0452D2082574F9F000168865 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,8 +54,8 @@
 		0452D1FE2574F9EF00168865 /* CoverFlow */ = {
 			isa = PBXGroup;
 			children = (
-				0452D2162574FA3E00168865 /* Controller */,
 				0452D2152574FA2B00168865 /* View */,
+				0452D2162574FA3E00168865 /* Controller */,
 				0452D2142574FA0200168865 /* Support */,
 			);
 			path = CoverFlow;
@@ -66,10 +64,9 @@
 		0452D2142574FA0200168865 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				0452D2082574F9F000168865 /* Assets.xcassets */,
 				0452D1FF2574F9EF00168865 /* AppDelegate.swift */,
 				0452D20A2574F9F000168865 /* LaunchScreen.storyboard */,
-				0452D2012574F9EF00168865 /* SceneDelegate.swift */,
-				0452D2082574F9F000168865 /* Assets.xcassets */,
 				0452D20D2574F9F000168865 /* Info.plist */,
 			);
 			path = Support;
@@ -163,7 +160,6 @@
 			files = (
 				0452D2042574F9EF00168865 /* ViewController.swift in Sources */,
 				0452D2002574F9EF00168865 /* AppDelegate.swift in Sources */,
-				0452D2022574F9EF00168865 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +309,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8QU8WR3NHA;
 				INFOPLIST_FILE = CoverFlow/Support/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,6 +329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8QU8WR3NHA;
 				INFOPLIST_FILE = CoverFlow/Support/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
