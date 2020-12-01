@@ -9,6 +9,17 @@ import UIKit
 
 final class CustomImage: UIImageView {
     
-    var position: ViewManager.TypesOfImageViews!
+    private var position: ViewManager.TypesOfImageViews?
+    
+    func getPosition () -> ViewManager.TypesOfImageViews {
+        guard let position = position else {
+            return .middle
+        }
+        return position
+    }
+    
+    func changePosition(type: ViewManager.TypesOfImageViews) {
+        position = type
+    }
     
 }
