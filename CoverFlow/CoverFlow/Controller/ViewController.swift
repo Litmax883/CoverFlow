@@ -9,15 +9,16 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    // MARK: - IBOutlets
-    @IBOutlet weak var mainImage: UIImageView!
-    @IBOutlet weak var leftImage: UIImageView!
-    @IBOutlet weak var rightImage: UIImageView!
-    
-    // MARK: - Public Properties
-    
+
     // MARK: - Private Properties
-    var numberOfImage = 0
+    let viewManager = ViewManager()
+    
+    var leftImage: UIImageView!
+    var midImage: UIImageView!
+    var rightImage: UIImageView!
+    
+    
+    private var numberOfImage = 3
     
     private var images = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"]
     
@@ -25,68 +26,56 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setGestures()
+        leftImage = createView(name: images[0], type: .leftOnScreen)
+        midImage = createView(name: images[1], type: .middle)
+        rightImage = createView(name: images[2], type: .rightOnScreen)
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        transformImages()
         
     }
-    
-    // MARK: - Public Methods
     
     
     // MARK: - Private Methods
-    
-    private func transformImages() {
-        var leftImageTransform = CATransform3DIdentity
-        leftImageTransform.m34 = 1 / -500
-        leftImageTransform = CATransform3DRotate(leftImageTransform, 70, 0, 1, 0)
+    private func createView(name: String, type: ViewManager.TypesOfImageViews) -> UIImageView {
         
-        var rightImageTransform = CATransform3DIdentity
-        rightImageTransform.m34 = 1 / 500
-        rightImageTransform = CATransform3DRotate(rightImageTransform, 70, 0, 1, 0)
+        let image = viewManager.createImageView()
+        image.image = UIImage(named: name)
+        view.addSubview(image)
+        viewManager.imageViewConstraint(image: image, view: self.view, type: type)
+        setGesture(image: image, type: type)
         
-        leftImage.layer.transform = leftImageTransform
-        rightImage.layer.transform = rightImageTransform
-        
-        leftImage.layer.zPosition = -300
-        rightImage.layer.zPosition = -300
+        return image
     }
     
-    private func setGestures() {
+    
+    private func setGesture(image: UIImageView, type: ViewManager.TypesOfImageViews) {
+
+        if type == .middle {
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageTapped(tapGestureRecognizer:)))
+
+        image.isUserInteractionEnabled = true
+        image.addGestureRecognizer(tapGestureRecognizer)
+        }
         
-        let tapLeftGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(imageTapped(tapGestureRecognizer:)))
-        let tapRightGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(imageTapped(tapGestureRecognizer:)))
-        leftImage.isUserInteractionEnabled = true
-        rightImage.isUserInteractionEnabled = true
-        rightImage.addGestureRecognizer(tapRightGestureRecognizer)
-        leftImage.addGestureRecognizer(tapLeftGestureRecognizer)
     }
     
-    @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
-    {
+    @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         
-        if numberOfImage < 10 {
-            mainImage.image = tappedImage.image
-            tappedImage.image = UIImage(named: images[numberOfImage])
-            numberOfImage += 1
-        } else {
-            mainImage.image = tappedImage.image
-            tappedImage.image = UIImage(named: images[0])
-            numberOfImage = 1
+        UIView.animate(withDuration: 1) {
+            
+            print("ffff")
+
         }
     }
     
-    // MARK: - IBActions
-    
-    
+
+
 }
 
