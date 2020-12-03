@@ -23,8 +23,6 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self.view.frame.width / 120)
-        
         viewManager.createBackgroundImage(view: self.view)
         
         leftImage = createView(indexOfImage: 0, type: .leftOnScreen)

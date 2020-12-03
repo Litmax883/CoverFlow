@@ -32,16 +32,18 @@ final class ViewManager {
         }
     
     func imageViewConstraint(image: CustomImage, view: UIView, type: TypesOfImageViews) {
+        let lessSideConstant = view.frame.width < view.frame.height ? view.frame.width : view.frame.height
         
         switch type {
-        
         case .leftOnScreen:
             
-            let width = image.widthAnchor.constraint(equalToConstant: view.frame.width / 2)
-            let height = image.heightAnchor.constraint(equalToConstant: view.frame.width / 2)
+            let width = image.widthAnchor.constraint(equalToConstant: lessSideConstant / 2)
+            let height = image.heightAnchor.constraint(equalToConstant: lessSideConstant / 2)
             let x = image.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -view.frame.width / 3.45)
             let y = image.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            
             NSLayoutConstraint.activate([width, height, x, y])
+            
             image.anchorWight = width
             image.anchorHeight = height
             image.anchorX = x
@@ -51,11 +53,13 @@ final class ViewManager {
             
         case .middle:
             
-            let width = image.widthAnchor.constraint(equalToConstant: view.frame.width / 1.6)
-            let height = image.heightAnchor.constraint(equalToConstant: view.frame.width / 1.6)
+            let width = image.widthAnchor.constraint(equalToConstant: lessSideConstant / 1.6)
+            let height = image.heightAnchor.constraint(equalToConstant: lessSideConstant / 1.6)
             let x = image.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             let y = image.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            
             NSLayoutConstraint.activate([width, height, x, y])
+            
             image.anchorWight = width
             image.anchorHeight = height
             image.anchorX = x
@@ -63,15 +67,18 @@ final class ViewManager {
             
         case .rightOnScreen:
             
-            let width = image.widthAnchor.constraint(equalToConstant: view.frame.width / 2)
-            let height = image.heightAnchor.constraint(equalToConstant: view.frame.width / 2)
+            let width = image.widthAnchor.constraint(equalToConstant: lessSideConstant / 2)
+            let height = image.heightAnchor.constraint(equalToConstant: lessSideConstant / 2)
             let x = image.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.frame.width / 3.45)
             let y = image.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            
             NSLayoutConstraint.activate([width, height, x, y])
+            
             image.anchorWight = width
             image.anchorHeight = height
             image.anchorX = x
             image.anchorY = y
+            
             transformImage(image: image, type: type)
         }
     }
@@ -91,14 +98,15 @@ final class ViewManager {
     }
     
     func sideImageToMain(_ image: CustomImage, view: UIView) {
+        let lessSideConstant = view.frame.width < view.frame.height ? view.frame.width : view.frame.height
         
         var imageTransform = CATransform3DIdentity
         imageTransform.m34 = 0
         imageTransform = CATransform3DRotate(imageTransform, 0, 0, 0, 0)
         image.layer.transform = imageTransform
         
-        image.anchorHeight?.constant = view.frame.width / 1.6
-        image.anchorWight?.constant = view.frame.width / 1.6
+        image.anchorHeight?.constant = lessSideConstant / 1.6
+        image.anchorWight?.constant = lessSideConstant / 1.6
         image.anchorX?.constant = 0
         image.anchorY?.constant = 0
         
@@ -106,17 +114,23 @@ final class ViewManager {
     }
     
     func mainImageToSide(_ image: CustomImage, view: UIView, type: TypesOfImageViews) {
+        let lessSideConstant = view.frame.width < view.frame.height ? view.frame.width : view.frame.height
+
         if type == .leftOnScreen {
-            image.anchorHeight?.constant = view.frame.width / 2
-            image.anchorWight?.constant = view.frame.width / 2
+            
+            image.anchorHeight?.constant = lessSideConstant / 2
+            image.anchorWight?.constant = lessSideConstant / 2
             image.anchorX?.constant = -view.frame.width / 3.45
             image.anchorY?.constant = 0
+            
             self.transformImage(image: image, type: type)
         } else if type == .rightOnScreen {
-            image.anchorHeight?.constant = view.frame.width / 2
-            image.anchorWight?.constant = view.frame.width / 2
+            
+            image.anchorHeight?.constant = lessSideConstant / 2
+            image.anchorWight?.constant = lessSideConstant / 2
             image.anchorX?.constant = view.frame.width / 3.45
             image.anchorY?.constant = 0
+            
             self.transformImage(image: image, type: type)
         }
         image.layer.zPosition = -200
@@ -139,6 +153,5 @@ final class ViewManager {
         image.layer.transform = imageTransform
         image.layer.zPosition = -500
     }
-    
     
 }

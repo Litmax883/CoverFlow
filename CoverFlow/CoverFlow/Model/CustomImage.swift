@@ -17,7 +17,7 @@ final class CustomImage: UIImageView {
     var anchorX: NSLayoutConstraint?
     var anchorY: NSLayoutConstraint?
     
-    func getPosition () -> ViewManager.TypesOfImageViews {
+    func getPosition() -> ViewManager.TypesOfImageViews {
         guard let position = position else {
             return .middle
         }
@@ -28,7 +28,7 @@ final class CustomImage: UIImageView {
         position = type
     }
     
-    func getNextIndex()-> Int {
+    func getNextIndex() -> Int {
         if indexOfImage == 12 {
         return 0
         } else {
@@ -36,7 +36,7 @@ final class CustomImage: UIImageView {
         }
     }
     
-    func getPreviousIndex()-> Int {
+    func getPreviousIndex() -> Int {
         if indexOfImage == 0 {
         return 12
         } else {
