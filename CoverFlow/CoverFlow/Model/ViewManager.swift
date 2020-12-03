@@ -19,7 +19,7 @@ final class ViewManager {
         
         let image = UIImageView()
         image.image = UIImage(named: "bgImage1")
-        image.layer.zPosition = -500
+        image.layer.zPosition = -1000
         view.addSubview(image)
         image.translatesAutoresizingMaskIntoConstraints = false
 
@@ -39,7 +39,7 @@ final class ViewManager {
             
             let width = image.widthAnchor.constraint(equalToConstant: lessSideConstant / 2)
             let height = image.heightAnchor.constraint(equalToConstant: lessSideConstant / 2)
-            let x = image.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -view.frame.width / 3.45)
+            let x = image.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -lessSideConstant / 3.45)
             let y = image.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             
             NSLayoutConstraint.activate([width, height, x, y])
@@ -69,7 +69,7 @@ final class ViewManager {
             
             let width = image.widthAnchor.constraint(equalToConstant: lessSideConstant / 2)
             let height = image.heightAnchor.constraint(equalToConstant: lessSideConstant / 2)
-            let x = image.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.frame.width / 3.45)
+            let x = image.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: lessSideConstant / 3.45)
             let y = image.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             
             NSLayoutConstraint.activate([width, height, x, y])
@@ -120,7 +120,7 @@ final class ViewManager {
             
             image.anchorHeight?.constant = lessSideConstant / 2
             image.anchorWight?.constant = lessSideConstant / 2
-            image.anchorX?.constant = -view.frame.width / 3.45
+            image.anchorX?.constant = -lessSideConstant / 3.45
             image.anchorY?.constant = 0
             
             self.transformImage(image: image, type: type)
@@ -128,7 +128,7 @@ final class ViewManager {
             
             image.anchorHeight?.constant = lessSideConstant / 2
             image.anchorWight?.constant = lessSideConstant / 2
-            image.anchorX?.constant = view.frame.width / 3.45
+            image.anchorX?.constant = lessSideConstant / 3.45
             image.anchorY?.constant = 0
             
             self.transformImage(image: image, type: type)
@@ -149,7 +149,7 @@ final class ViewManager {
             imageTransform = CATransform3DRotate(imageTransform, 70, 0, 1, 0)
             image.anchorX?.constant -= 150
         }
-        image.alpha = 0.2
+        image.alpha = 0
         image.layer.transform = imageTransform
         image.layer.zPosition = -500
     }
