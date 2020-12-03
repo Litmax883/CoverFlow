@@ -10,6 +10,7 @@ import UIKit
 final class CustomImage: UIImageView {
     
     private var position: ViewManager.TypesOfImageViews?
+    private var indexOfImage: Int! 
             
     var anchorWight: NSLayoutConstraint?
     var anchorHeight: NSLayoutConstraint?
@@ -25,6 +26,26 @@ final class CustomImage: UIImageView {
     
     func changePosition(type: ViewManager.TypesOfImageViews) {
         position = type
+    }
+    
+    func getNextIndex()-> Int {
+        if indexOfImage == 12 {
+        return 0
+        } else {
+            return indexOfImage + 1
+        }
+    }
+    
+    func getPreviousIndex()-> Int {
+        if indexOfImage == 0 {
+        return 12
+        } else {
+            return indexOfImage - 1
+        }
+    }
+    
+    func changeIndex(_ index: Int) {
+        indexOfImage = index
     }
     
 }
