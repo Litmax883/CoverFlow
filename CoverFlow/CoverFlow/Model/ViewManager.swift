@@ -138,19 +138,12 @@ final class ViewManager {
     
     func sideImageToRemove(_ image: CustomImage, type: TypesOfImageViews) {
         
-        var imageTransform = CATransform3DIdentity
-        
         if type == .leftOnScreen {
-            imageTransform.m34 = 1 / 100
-            imageTransform = CATransform3DRotate(imageTransform, 70, 0, 1, 0)
             image.anchorX?.constant += 150
         } else if type == .rightOnScreen {
-            imageTransform.m34 = 1 / -100
-            imageTransform = CATransform3DRotate(imageTransform, 70, 0, 1, 0)
             image.anchorX?.constant -= 150
         }
         image.alpha = 0
-        image.layer.transform = imageTransform
         image.layer.zPosition = -500
     }
     
