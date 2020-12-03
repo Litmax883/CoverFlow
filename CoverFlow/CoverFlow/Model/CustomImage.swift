@@ -10,6 +10,11 @@ import UIKit
 final class CustomImage: UIImageView {
     
     private var position: ViewManager.TypesOfImageViews?
+            
+    var anchorWight: NSLayoutConstraint?
+    var anchorHeight: NSLayoutConstraint?
+    var anchorX: NSLayoutConstraint?
+    var anchorY: NSLayoutConstraint?
     
     func getPosition () -> ViewManager.TypesOfImageViews {
         guard let position = position else {

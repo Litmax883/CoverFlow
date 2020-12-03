@@ -9,19 +9,21 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    
     // MARK: - Private Properties
+    
     let viewManager = ViewManager()
     
     var midImage: CustomImage!
     var leftImage: CustomImage!
     var rightImage: CustomImage!
+    var removeImage: CustomImage!
     
     private var numberOfImage = 3 {
         didSet {
             if numberOfImage == 10 {
                 self.numberOfImage = 0
-                print(numberOfImage)
+            } else if numberOfImage < 0 {
+                self.numberOfImage = 9
             }
         }
     }
@@ -32,33 +34,31 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        midImage = createView(name: images[1], type: .middle)
         leftImage = createView(name: images[0], type: .leftOnScreen)
+        midImage = createView(name: images[1], type: .middle)
         rightImage = createView(name: images[2], type: .rightOnScreen)
         
     }
-    
-    
+ 
     // MARK: - Private Methods
+    
     private func createView(name: String, type: ViewManager.TypesOfImageViews) -> CustomImage {
         
         let image = CustomImage()
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.changePosition(type: type)
         image.image = UIImage(named: name)
         view.addSubview(image)
-        viewManager.transformImages(image: image, type: type)
+        
+        image.translatesAutoresizingMaskIntoConstraints = false
         viewManager.imageViewConstraint(image: image, view: self.view, type: type)
+        
+        image.layer.cornerRadius = 10
+        image.clipsToBounds = true
+        
         setGesture(on: image)
         
         return image
     }
-    
     
     private func setGesture(on image: CustomImage) {
         
@@ -74,59 +74,63 @@ final class ViewController: UIViewController {
         
         let tappedImage = tapGestureRecognizer.view as! CustomImage
         let position = tappedImage.getPosition()
-        self.numberOfImage += 1
         
             switch position {
             
             case .leftOnScreen:
-                
+                self.numberOfImage += 1
       
                 UIView.animate(withDuration: 1) {
-                    _ = self.createView(name: self.images[self.numberOfImage], type: .leftOnScreen)
-                    
-                    self.viewManager.sideImageToMain(self.leftImage, view: self.view)
-                    self.leftImage.changePosition(type: .middle)
-                    
-//                    self.midImage.transform = CGAffineTransform(translationX: 200, y: 0)
-//                    self.midImage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-//                    self.viewManager.transformImages(image: self.midImage, type: .rightOnScreen)
-//                    self.midImage.changePosition(type: .rightOnScreen)
-                }
-                
-                self.rightImage.removeFromSuperview()
+                    //remove right
+                    self.removeImage = self.rightImage
+                    self.viewManager.sideImageToRemove(self.removeImage, type: .leftOnScreen)
 
-            case .rightOnScreen:
-                
-                _ = self.createView(name: self.images[self.numberOfImage], type: .rightOnScreen)
-      
-                UIView.animate(withDuration: 1) {
+                    //middle to right
+                    self.viewManager.mainImageToSide(self.midImage, type: .rightOnScreen)
+                    self.midImage.changePosition(type: .rightOnScreen)
+                    self.rightImage = self.midImage
+                    //left to middle
+                    self.viewManager.sideImageToMain(self.leftImage)
+                    self.leftImage.changePosition(type: .middle)
+                    self.midImage = self.leftImage
                     
-                    self.rightImage.transform = CGAffineTransform(translationX: 200, y: 0)
-                    self.rightImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-                    self.viewManager.sideImageToMain(self.rightImage, view: self.view)
-                    self.rightImage.changePosition(type: .middle)
-                    
-                    self.midImage.transform = CGAffineTransform(translationX: -200, y: 0)
-                    self.midImage.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-                    self.viewManager.transformImages(image: self.midImage, type: .leftOnScreen)
-                    self.midImage.changePosition(type: .leftOnScreen)
+                    self.view.layoutIfNeeded()
+                    //create new view
+                    self.leftImage = self.createView(name: self.images[self.numberOfImage], type: .leftOnScreen)
+                    self.leftImage.alpha = 0
+                    self.leftImage.alpha = 1
+                } completion: { (true) in
+                    self.removeImage.removeFromSuperview()
                 }
                 
-                self.leftImage.removeFromSuperview()
-      
-                
+            case .rightOnScreen:
+                self.numberOfImage -= 1
+
+                UIView.animate(withDuration: 1) {
+                    //remove left
+                    self.removeImage = self.leftImage
+                    self.viewManager.sideImageToRemove(self.removeImage, type: .rightOnScreen)
+                    //middle to left
+                    self.viewManager.mainImageToSide(self.midImage, type: .leftOnScreen)
+                    self.midImage.changePosition(type: .leftOnScreen)
+                    self.leftImage = self.midImage
+                    //right to middle
+                    self.viewManager.sideImageToMain(self.rightImage)
+                    self.rightImage.changePosition(type: .middle)
+                    self.midImage = self.rightImage
+
+                    self.view.layoutIfNeeded()
+                    //create new view and remove old
+                    self.rightImage = self.createView(name: self.images[self.numberOfImage], type: .rightOnScreen)
+                    self.rightImage.alpha = 0
+                    self.rightImage.alpha = 1
+                } completion: { (true) in
+                    self.removeImage.removeFromSuperview()
+                }
             default:
-                print("Other")
+                break
             }
-        
     }
-    
-//    UIView.animate(withDuration: 2.0) {
-//        self.redTopView.transform = CGAffineTransform(translationX: -160, y: 0)
-//        self.redBottomView.transform = CGAffineTransform(translationX: -160, y: 0)
-//        self.blueTopView.transform = CGAffineTransform(translationX: -160, y: 0)
-//        self.blueBottomView.transform = CGAffineTransform(translationX: -160, y: 0)
-//    }
-    
+
 }
 
