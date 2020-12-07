@@ -30,7 +30,7 @@ final class ViewManager {
             image.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
         }
-    
+
     func imageViewConstraint(image: CustomImage, view: UIView, type: TypesOfImageViews) {
         let lessSideConstant = view.frame.width < view.frame.height ? view.frame.width : view.frame.height
         

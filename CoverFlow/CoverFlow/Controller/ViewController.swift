@@ -60,7 +60,7 @@ final class ViewController: UIViewController {
         image.isUserInteractionEnabled = true
         image.addGestureRecognizer(tapGestureRecognizer)
     }
-    
+
     @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         
         let tappedImage = tapGestureRecognizer.view as! CustomImage
@@ -86,7 +86,7 @@ final class ViewController: UIViewController {
                     
                     self.view.layoutIfNeeded()
                     //create new view
-                    self.leftImage = self.createView(indexOfImage: self.midImage.getPreviousIndex(), type: .leftOnScreen)
+                    self.leftImage = self.createView(indexOfImage: self.midImage.getPreviousIndex(num: self.logicManager.images.count), type: .leftOnScreen)
                     self.leftImage.alpha = 0
                     self.leftImage.alpha = 1
                     
@@ -111,7 +111,7 @@ final class ViewController: UIViewController {
 
                     self.view.layoutIfNeeded()
                     //create new view and remove old
-                    self.rightImage = self.createView(indexOfImage: self.midImage.getNextIndex(), type: .rightOnScreen)
+                    self.rightImage = self.createView(indexOfImage: self.midImage.getNextIndex(num: self.logicManager.images.count), type: .rightOnScreen)
                     self.rightImage.alpha = 0
                     self.rightImage.alpha = 1
                     

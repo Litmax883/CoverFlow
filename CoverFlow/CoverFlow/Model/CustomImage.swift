@@ -28,17 +28,17 @@ final class CustomImage: UIImageView {
         position = type
     }
     
-    func getNextIndex() -> Int {
-        if indexOfImage == 12 {
+    func getNextIndex(num: Int) -> Int {
+        if indexOfImage == num - 1 {
         return 0
         } else {
             return indexOfImage + 1
         }
     }
     
-    func getPreviousIndex() -> Int {
+    func getPreviousIndex(num: Int) -> Int {
         if indexOfImage == 0 {
-        return 12
+        return num - 1
         } else {
             return indexOfImage - 1
         }
