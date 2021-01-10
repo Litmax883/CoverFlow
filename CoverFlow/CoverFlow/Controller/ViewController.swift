@@ -70,7 +70,7 @@ final class ViewController: UIViewController {
             
             case .leftOnScreen:
       
-                UIView.animate(withDuration: 1) {
+                UIView.animate(withDuration: 0.5) {
                     //remove right
                     self.removeImage = self.rightImage
                     self.viewManager.sideImageToRemove(self.removeImage, type: .leftOnScreen)
@@ -96,7 +96,7 @@ final class ViewController: UIViewController {
                 
             case .rightOnScreen:
 
-                UIView.animate(withDuration: 1) {
+                UIView.animate(withDuration: 0.5) {
                     //remove left
                     self.removeImage = self.leftImage
                     self.viewManager.sideImageToRemove(self.removeImage, type: .rightOnScreen)

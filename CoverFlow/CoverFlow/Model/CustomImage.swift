@@ -9,7 +9,7 @@ import UIKit
 
 final class CustomImage: UIImageView {
     
-    private var position: ViewManager.TypesOfImageViews?
+    private var position: ViewManager.TypesOfImageViews!
     private var indexOfImage: Int! 
             
     var anchorWight: NSLayoutConstraint?

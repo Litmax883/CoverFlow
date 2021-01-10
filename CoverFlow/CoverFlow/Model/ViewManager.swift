@@ -133,7 +133,7 @@ final class ViewManager {
             
             self.transformImage(image: image, type: type)
         }
-        image.layer.zPosition = -200
+        image.layer.zPosition = -300
     }
     
     func sideImageToRemove(_ image: CustomImage, type: TypesOfImageViews) {
